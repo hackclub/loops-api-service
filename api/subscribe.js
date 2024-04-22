@@ -4,9 +4,9 @@ export default async function handler(req, res) {
   try {
     const { email, subscribeField } = req.body
 
-    const loops = await new LoopsClient(process.env.LOOPS_API_KEY);
+    const loops = new LoopsClient(process.env.LOOPS_API_KEY)
 
-    const foundContacts = await loops.findContact(email)
+    const foundContacts = await loops.findContact({email})
 
     if (foundContacts.length == 0) { // if the contact isn't already in the DB
       await loops.createContact(email, {
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ ok: true })
   } catch (error) {
+    console.log("Error", error.message)
     res.status(500).json({ error: error.message })
   }
 }
