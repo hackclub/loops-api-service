@@ -1,0 +1,9 @@
+{
+  "name": "loops-api-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "loops": "^2.0.0"
+  }
+}
