@@ -2,7 +2,7 @@ import { LoopsClient } from "loops"
 
 export default async function handler(req, res) {
   try {
-    const { email, subscribeField } = req.body
+    const { email, subscribeField, userGroup } = req.body
 
     const loops = new LoopsClient(process.env.LOOPS_API_KEY)
 
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     if (foundContacts.length == 0) { // if the contact isn't already in the DB
       await loops.createContact(email, {
         source: `API Email Subscribe - ${subscribeField}`,
-        userGroup: "Hack Clubber",
+        userGroup: userGroup ? userGroup : "Hack Clubber",
       })
     }
 
